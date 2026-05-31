@@ -6,7 +6,9 @@
 //! And its inverse (Möbius inversion):
 //!   κ_n = Σ_{π ∈ NC(n)} μ(0_n, π) ∏_{B ∈ π} m_{|B|}
 
-use crate::partition::{NCPartition, catalan};
+use crate::partition::NCPartition;
+#[cfg(test)]
+use crate::partition::catalan;
 
 /// Convert moments to free cumulants using Möbius inversion on NC lattice.
 ///

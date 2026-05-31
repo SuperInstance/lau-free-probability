@@ -1,3 +1,5 @@
+#![deny(unsafe_code)]
+#![allow(clippy::needless_range_loop)]
 //! # lau-free-probability
 //!
 //! Free probability theory for large-scale agent systems.

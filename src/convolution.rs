@@ -103,7 +103,7 @@ pub fn multiplicative_free_convolution(moments_x: &[f64], moments_y: &[f64]) -> 
     // Compute ψ functions and their inverses
     let mut result = Vec::with_capacity(n);
     for order in 1..=n {
-        let m = compute_multiplicative_moment(&moments_x, &kappa_x, &kappa_y, order);
+        let m = compute_multiplicative_moment(moments_x, &kappa_x, &kappa_y, order);
         result.push(m);
     }
     result
@@ -158,10 +158,10 @@ pub fn free_clt(moments: &[f64], n: usize) -> Vec<f64> {
     // κ_k(sum) = N * κ_k(X)
     // After scaling by 1/√N: κ_k(scaled) = N * κ_k(X) / N^{k/2}
     let cumulants = moments_to_free_cumulants(moments);
-    let scaled_cumulants: Vec<f64> = cumulants
+    let _scaled_cumulants: Vec<f64> = cumulants
         .iter()
         .enumerate()
-        .map(|(i, k)| *k * n as f64 / (n as f64).powi(((i + 1) / 2) as i32))
+        .map(|(i, k)| *k * n as f64 / (n as f64).powi(((i + 1).div_ceil(2)) as i32))
         .collect();
 
     // For k=1: N * κ_1 / √N = √N * κ_1

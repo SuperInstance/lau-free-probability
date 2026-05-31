@@ -152,7 +152,7 @@ impl SemicircleLaw {
             // Complex case: use positive imaginary part convention
             let sq = (-disc).sqrt();
             let real = dz / (r2 / 2.0);
-            let imag = -sq / (r2 / 2.0);
+            let _imag = -sq / (r2 / 2.0);
             // Return real part approximation
             real
         }

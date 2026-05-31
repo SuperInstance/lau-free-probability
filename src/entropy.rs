@@ -81,7 +81,7 @@ fn estimate_density_from_moments(moments: &[f64], n_points: usize, radius: f64) 
     for i in 0..n_points {
         let t = -radius + (i as f64 + 0.5) * dx;
         let eps = 0.01;
-        let mut g_re = 0.0_f64;
+        let mut _g_re = 0.0_f64;
         let mut g_im = 0.0_f64;
         for n in 0..=moments.len() {
             let m_n = if n == 0 { 1.0 } else { moments[n - 1] };
@@ -93,7 +93,7 @@ fn estimate_density_from_moments(moments: &[f64], n_points: usize, radius: f64) 
             let theta = im.atan2(re);
             let new_r = 1.0 / r.powi((n + 1) as i32);
             let new_theta = -((n + 1) as f64) * theta;
-            g_re += m_n * new_r * new_theta.cos();
+            _g_re += m_n * new_r * new_theta.cos();
             g_im += m_n * new_r * new_theta.sin();
         }
         density[i] = (-g_im / std::f64::consts::PI).max(0.0);

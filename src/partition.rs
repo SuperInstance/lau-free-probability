@@ -197,7 +197,7 @@ impl NCPartition {
 
         for i in 1..n {
             let separated = block_intervals.iter().any(|&(a, b)| {
-                a <= i && b >= i + 1
+                a <= i && b > i
             });
             if separated {
                 complement_blocks.push(std::mem::take(&mut current_block));
@@ -222,7 +222,7 @@ impl NCPartition {
         // where C_k is the Catalan number
         let n = from.n;
         if from == &NCPartition::finest(n) && to == &NCPartition::one_block(n) {
-            let sign = if (n - 1) % 2 == 0 { 1 } else { -1 };
+            let sign = if (n - 1).is_multiple_of(2) { 1 } else { -1 };
             return sign * catalan(n - 1) as i64;
         }
         // General case: use the formula μ(π, σ) = ∏_B (-1)^(|B|-1) * C_{|B|-1}
@@ -230,8 +230,7 @@ impl NCPartition {
         // For simplicity, compute via the Kreweras complement structure
         let diff = to.num_blocks() as i32 - from.num_blocks() as i32;
         // This is a simplified version; full implementation would need interval structure
-        let sign = if diff % 2 == 0 { 1 } else { -1 };
-        sign
+        if diff % 2 == 0 { 1 } else { -1 }
     }
 
     /// Compute the full Möbius function μ(0_n, π) for all π in NC(n).
