@@ -1,0 +1,11 @@
+[package]
+name = "lau-free-probability"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+repository = "https://github.com/SuperInstance/lau-free-probability"
+description = "Free probability for agent populations — noncommutative CLT, R-transform, and random matrix limits"
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+nalgebra = "0.33"
